@@ -41,15 +41,15 @@ std::vector<bool> findParity(std::vector<bool> data, int count) {
 			}
 			start += pow(2, p + 1);
 		}
-		
+
 		// one round answer is found
 		// find if even parity is satisfied.
 		if (!evenParity(ans)) par.push_back(1);
 		else par.push_back(0);
-		
+
 		ans.clear();
 		p++;
-<<<<<<< HEAD
+		
 	}
 	return par;
 }
@@ -89,7 +89,7 @@ int main() {
 
 	// replace zeros with correct parity
 	std::vector<bool> hammingCode = emplaceBack(rBits, parity);
-	
+
 	std::cout << "\n Hamming Code Generated: ";
 	for (bool i : hammingCode) std::cout << i << " ";
 
@@ -97,52 +97,3 @@ int main() {
 	_getch();
 	return 0;
 }
-=======
-	}
-	return par;
-}
-
-std::vector<bool> emplaceBack(std::vector<bool> rBits, std::vector<bool> parity) {
-	for (int i = 0; i < parity.size(); i++) rBits.at(pow(2, i) - 1) = parity.at(i);
-	return rBits;
-}
-
-int main() {
-
-	int size;
-	std::cout << "\n Enter the length of data:";
-	std::cin >> size;
-
-	std::vector<bool> data;
-
-	std::cout << "\n Enter data:";
-	for (int i = 0; i < size; i++) {
-		int temp;
-		std::cin >> temp;
-		data.push_back(temp);
-	}
-
-	// find the number of redundant bits to be added
-	int r = calRedBits(data);
-
-	// insert zeros in their respective positions
-	std::vector<bool> rBits = findBits(r, data);
-
-	// find correct parity bits
-	std::vector<bool> parity = findParity(rBits, r);
-
-	std::cout << "\n";
-	for (int i = 0; i < r; i++)	std::cout << "P" << pow(2, i) << ": " << parity.at(i) << "\n";
-	std::cout << "\n";
-
-	// replace zeros with correct parity
-	std::vector<bool> hammingCode = emplaceBack(rBits, parity);
-	
-	std::cout << "\n Hamming Code Generated: ";
-	for (bool i : hammingCode) std::cout << i << " ";
-
-	//hello
-	_getch();
-	return 0;
-}
->>>>>>> 67b2b0bbd3e678815027fe14887cd05a55045215
