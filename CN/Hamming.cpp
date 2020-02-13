@@ -53,6 +53,11 @@ std::vector<bool> findParity(std::vector<bool> data, int count) {
 	return par;
 }
 
+std::vector<bool> emplaceBack(std::vector<bool> rBits, std::vector<bool> parity) {
+	for (int i = 0; i < parity.size(); i++) rBits.at(pow(2, i) - 1) = parity.at(i);
+	return rBits;
+}
+
 int main() {
 
 	int size;
@@ -75,16 +80,19 @@ int main() {
 	std::vector<bool> rBits = findBits(r, data);
 
 	// find correct parity bits
-	std::vector<bool> hammingCode = findParity(rBits, r);
+	std::vector<bool> parity = findParity(rBits, r);
 
 	std::cout << "\n";
-	for (int i = 0; i < r; i++)
-		std::cout << "P" << pow(2, i) << ": " << hammingCode.at(i) << "\n";
+	for (int i = 0; i < r; i++)	std::cout << "P" << pow(2, i) << ": " << parity.at(i) << "\n";
 	std::cout << "\n";
 
 	// replace zeros with correct parity
+	std::vector<bool> hammingCode = emplaceBack(rBits, parity);
+	
+	std::cout << "\n Hamming Code Generated: ";
+	for (bool i : hammingCode) std::cout << i << " ";
 
-
+	//hello
 	_getch();
 	return 0;
 }
