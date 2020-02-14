@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <conio.h>
 
 int calRedBits(const std::vector<bool>& data) {
@@ -58,10 +59,8 @@ std::vector<bool> emplaceBack(std::vector<bool> rBits, std::vector<bool> parity)
 	return rBits;
 }
 
-std::vector<bool> sender(std::vector<bool> data) {
-	// find the number of redundant bits to be added
-	int r = calRedBits(data);
-
+std::vector<bool> sender(std::vector<bool> data, int r) {
+	
 	// insert zeros in their respective positions
 	std::vector<bool> rBits = findBits(r, data);
 
@@ -77,29 +76,95 @@ std::vector<bool> sender(std::vector<bool> data) {
 	return hammingCode;
 }
 
+bool allZeros(const std::vector<bool>& v) {
+	for (bool i : v) if (i != 0) return false;
+	return true;
+}
+
+auto convertToDecimal(const std::vector<bool>& par) {
+	auto integer = 0; int n = 0;
+
+	for (auto i : par) {
+		if (i == 1) integer += pow(2, n);
+		n++;
+	}
+	std::cout << "\n Dec:" << integer;
+	return integer;
+}
+
+void findAndCorrectError(std::vector<bool>& rec, const std::vector<bool>& par) {
+	auto errorPos = convertToDecimal(par);
+
+	std::cout << "\n Error found at position: " << errorPos;
+	if (rec.at(errorPos - 1)) rec.at(errorPos - 1) = 0;
+	else rec.at(errorPos - 1) = 1;
+
+}
 
 int main() {
 
-	int size;
-	std::cout << "\n Enter the length of data:";
-	std::cin >> size;
+	int choice;
 
-	std::vector<bool> data;
+	do {
 
-	std::cout << "\n Enter data:";
-	for (int i = 0; i < size; i++) {
-		int temp;
-		std::cin >> temp;
-		data.push_back(temp);
-	}
+		std::cout << "\n 1. Sender  2. Receiver  3. Exit \n";
+		std::cin >> choice;
+		std::vector<bool> data, hammingCode, received, par;
+		
+		switch (choice) {
+		case 1:
 
-	std::vector<bool> hammingCode = sender(data);
+			int size, r;
+			std::cout << "\n Enter the length of data:";
+			std::cin >> size;
 
-	
-	std::cout << "\n Hamming Code Generated: ";
-	for (bool i : hammingCode) std::cout << i << " ";
+			std::cout << "\n Enter data:";
+			for (int i = 0; i < size; i++) {
+				int temp;
+				std::cin >> temp;
+				data.push_back(temp);
+			}
 
-	//hello
+			// find the number of redundant bits to be added
+			r = calRedBits(data);
+
+			hammingCode = sender(data, r);
+
+			std::cout << "\n Hamming Code Generated: ";
+			for (bool i : hammingCode) std::cout << i << " ";
+
+			break;
+		case 2:
+
+			std::cout << "\n Enter received data. Press -1 to stop insertion:\n";
+			int val;
+			while (std::cin >> val) {
+				if (val == -1) break;
+				received.push_back(val);
+			}
+			
+
+			par = findParity(received, r);
+			std::cout << par.size() << std::endl;
+
+
+			if (allZeros(par)) std::cout << "\n Received data has no errors";
+			else {
+				std::cout << "\n Received data has error. ";
+				findAndCorrectError(received, par);
+				std::cout << "\n Corrected Data is:";
+				for (bool i : received) std::cout << i << " ";
+			}
+
+			break;
+		case 3:
+			exit(0);
+		default: std::cout << "\n Invalid option";
+		}
+
+
+	} while (choice != 3);
+
 	_getch();
 	return 0;
 }
