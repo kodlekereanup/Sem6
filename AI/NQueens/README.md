@@ -16,6 +16,8 @@
 # Heuristic Function
 
 What would be a good Heuristic Function?
+	## Aim: 
+		* No of Attacks = 0 
 
 # Notes
 
