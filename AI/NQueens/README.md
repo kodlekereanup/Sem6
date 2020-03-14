@@ -6,10 +6,20 @@
 	in (i, j) and left, right diagonals.
 
 ## Left Diagonal for any (i, j)  : i == j
-## Right Diagonal for any (i, j) : (i + j) / 2 == 1
+## Right Diagonal for any (i, j) : (i + j) == N - 1
 
 * Board is a N x N  matrix of integers
 * Integers represent the cost
 * Every position where a queen is placed is represented by a 1.
 * Store a vector that contains the indices of the queens' positions on the board, column-wise.
+
+# Heuristic Function
+
+What would be a good Heuristic Function?
+
+# Notes
+
+The Board probably should have padding of -1's all around it to make sure the piece doesn't 
+go out of the board boundary
+
 
