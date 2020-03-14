@@ -1,12 +1,12 @@
-#Basic Idea: 
+# Basic Idea: 
 	Place queens in such a way that no other queen is in it's attacking field.
 
-#Attacking Field: 
+# Attacking Field: 
 	If a queen is placed in ith row and jth column, no other queen should be placed
 	in (i, j) and left, right diagonals.
 
-##Left Diagonal for any (i, j)  : i == j
-##Right Diagonal for any (i, j) : (i + j) / 2
+## Left Diagonal for any (i, j)  : i == j
+## Right Diagonal for any (i, j) : (i + j) / 2
 
 * Board is a N x N  matrix of integers
 * Integers represent the cost
