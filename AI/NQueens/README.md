@@ -27,10 +27,10 @@ What would be a good Heuristic Function?
 	go out of the board boundary
 
 * For any (i, j):
-	* _UpDirection_:    (i - 1, j) | value(i - 1, j) != -1
-	* _DownDirection_:  (i + 1, j) | value(i + 1, j) != -1
-	* _LeftDirection_:  (i, j - 1) | value(i, j - 1) != -1
-	* _RightDirection_: (i, j + 1) | value(i, j + 1) != -1
-	* _LeftDiag_      : Assign Slope = -1
-	* _RigthDiag_     : Assign Slope = +1
+	* *UpDirection*:    (i - 1, j) | value(i - 1, j) != -1
+	* *DownDirection*:  (i + 1, j) | value(i + 1, j) != -1
+	* *LeftDirection*:  (i, j - 1) | value(i, j - 1) != -1
+	* *RightDirection*: (i, j + 1) | value(i, j + 1) != -1
+	* *LeftDiag*      : Assign Slope = -1
+	* *RigthDiag*     : Assign Slope = +1
 
