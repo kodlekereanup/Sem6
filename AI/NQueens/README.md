@@ -16,8 +16,7 @@
 # Heuristic Function
 
 What would be a good Heuristic Function?
-	## Aim: 
-		* No of Attacks = 0 
+	## Aim:
 
 # Notes
 
@@ -29,6 +28,6 @@ What would be a good Heuristic Function?
 	* DownDirection:  (i + 1, j) | value(i + 1, j) != -1
 	* LeftDirection:  (i, j - 1) | value(i, j - 1) != -1
 	* RightDirection: (i, j + 1) | value(i, j + 1) != -1
-	* LeftDiag
-	* RigthDiag 
+	* LeftDiag      : Assign Slope = -1
+	* RigthDiag     : Assign Slope = +1
 
