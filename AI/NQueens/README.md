@@ -6,7 +6,7 @@
 	in (i, j) and left, right diagonals.
 
 ## Left Diagonal for any (i, j)  : i == j
-## Right Diagonal for any (i, j) : (i + j) / 2
+## Right Diagonal for any (i, j) : (i + j) / 2 == 1
 
 * Board is a N x N  matrix of integers
 * Integers represent the cost
