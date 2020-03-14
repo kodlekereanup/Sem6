@@ -18,7 +18,8 @@
 What would be a good Heuristic Function?
 
 ## Aim
-+ Minimize Heuristic Functions such that No of Attacks = 0
+
+* Minimize Heuristic Functions such that No of Attacks = 0
 
 # Notes
 
