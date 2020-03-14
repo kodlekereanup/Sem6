@@ -16,7 +16,9 @@
 # Heuristic Function
 
 What would be a good Heuristic Function?
-	* ## Aim:
+
+## Aim
+	* Minimize Heuristic Functions such that No of Attacks = 0
 
 # Notes
 
