@@ -23,7 +23,7 @@ What would be a good Heuristic Function?
 
 # Notes
 
-* The Board probably should have padding of -1's all around it to make sure the piece doesn't 
+* Removed:The Board probably should have padding of -1's all around it to make sure the piece doesn't 
 	go out of the board boundary
 
 * For any (i, j):
