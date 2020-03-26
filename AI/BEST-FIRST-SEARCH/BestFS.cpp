@@ -1,13 +1,13 @@
-#include "pch.h"
 #include <iostream>
 #include <map>
 #include <vector>
 #include <queue>
-#include <conio.h>
 
 //TODO: 
 // Review the heuristic function
 // Review the 'No Solution' condition     
+// Uses the Hill Climbing Approch for path selection
+// Uses BestFS for successor selection
 
 /*
 PRODUCTION RULES
@@ -217,6 +217,6 @@ int main() {
 	BestFirstSearch(jug1, jug2, goal);
 
 	std::cout << "Done";
-	_getch();
+	//_getch();
 	return 0;
 }
