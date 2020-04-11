@@ -3,7 +3,7 @@
 #include <vector>
 #include <queue>
 
-//TODO: 
+// TODO: 
 // Review the heuristic function
 // Review the 'No Solution' condition     
 // Uses the Hill Climbing Approch for path selection
@@ -83,13 +83,13 @@ std::vector<std::pair<int, int>> generateStates(int j1, int j2, std::pair<int, i
 		{
 
 			int x = curr.first; int y = curr.second;
-			std::cout << "\n X: " << x << " Y: " << y << "\n";
+			//std::cout << "\n X: " << x << " Y: " << y << "\n";
 
 			while (y > 0 && x < j1) {
 				x++; y--;
 			}
 
-			std::cout << "\n X: " << x << " Y: " << y << "\n";
+			//std::cout << "\n X: " << x << " Y: " << y << "\n";
 
 			if (!gen[{x, y}]) {
 				children.push_back({ x, y });
@@ -99,7 +99,6 @@ std::vector<std::pair<int, int>> generateStates(int j1, int j2, std::pair<int, i
 	}
 	// x to y
 	if (curr.first != 0 && curr.second != j2) {
-
 
 		if (curr.second == 0) {
 			// becomes production number 5
@@ -113,9 +112,10 @@ std::vector<std::pair<int, int>> generateStates(int j1, int j2, std::pair<int, i
 			int x = curr.first; int y = curr.second;
 
 			while (x > 0 && y < j2) {
-				y++; x--;
+				y++; 
+				x--;
 			}
-			std::cout << "\n X: " << x << " Y: " << y << "\n";
+			//std::cout << "\n X: " << x << " Y: " << y << "\n";
 			if (!gen[{x, y}]) {
 				children.push_back({ x, y });
 				gen[{ x, y }] = true;
@@ -137,15 +137,7 @@ std::vector<std::pair<int, int>> generateStates(int j1, int j2, std::pair<int, i
 	return children;
 }
 
-bool allGenerated(const std::vector<std::pair<int, int>>& children, std::map<std::pair<int, int>, bool>& gen) {
-	for (std::pair<int, int> i : children) 
-		if (!gen[{i.first, i.second}]) return false;
-	return true;
-}
-
-void BestFirstSearch(int jug1, int jug2, int goal) {
-
-	std::cout << "\n Inside BFS \n";
+std::vector<std::pair<int, int>> BestFirstSearch(int jug1, int jug2, int goal) {
 
 	bool goalReached = false;
 	std::map<std::pair<int, int>, bool> generated;
@@ -164,12 +156,22 @@ void BestFirstSearch(int jug1, int jug2, int goal) {
 		// find all the children states
 		std::vector<std::pair<int, int>> children = generateStates(jug1, jug2, currentState, generated);
 
-		/*
-		if (allGenerated(children, generated)) {
-			std::cout << "\n No Solution for the given states \n";
+		// BUG? 
+		// children will be empty in two cases
+		// 1. the node has no children, but what does this mean? -- is this even possible?
+		// 2. the possible children are aleady generated and hence no
+		//    pushbacks were called, so empty.
+
+		// Check if children vector is empty instead of doing 
+		// the above thing. If the children vector is empty it means
+		// none of the push backs in the generateStates() function 
+		// were applied and so the vector is empty 
+		if(children.empty()) {
+			std::cout << "NO SOLUTION\n";
+			goalReached = false;
+			path.clear();
 			break;
 		}
-		*/
 
 		// heuristics
 		std::pair<int, int> best;
@@ -193,7 +195,6 @@ void BestFirstSearch(int jug1, int jug2, int goal) {
 				path.push_back(best);
 				break;
 			}
-
 		}
 
 		if (goalReached) break;
@@ -201,8 +202,7 @@ void BestFirstSearch(int jug1, int jug2, int goal) {
 
 	}
 
-	for (std::pair<int, int> i : path) std::cout << "(" << i.first << ", " << i.second << ")\n";
-
+	return path;
 }
 
 int main() {
@@ -214,9 +214,10 @@ int main() {
 	std::cout << "\n Enter Goal:";
 	std::cin >> goal;
 
-	BestFirstSearch(jug1, jug2, goal);
-
-	std::cout << "Done";
+	std::vector<std::pair<int, int>> path = BestFirstSearch(jug1, jug2, goal);
+	if(!path.empty()) 
+		for (std::pair<int, int> i : path) std::cout << "(" << i.first << ", " << i.second << ")\n";
+	
 	//_getch();
 	return 0;
 }
